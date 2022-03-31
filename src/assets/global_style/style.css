@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+:root {
+    /* BACKGROUND */
+    --btn-login-bk: #fff;
+    --btn-action-bk: darkcyan;
+    --input-login-bk: rgba(255, 255, 255, 0.1);
+    --input-register-bk: rgba(255, 255, 255, 0.1);
+    /* COLOR */
+    --btn-login-cl: #000;
+    --btn-action-cl: #fff;
+    --input-login-cl: #fff;
+    --input-register-cl: #fff;
+    /* BORDER */
+    --btn-login-bd: 1px solid rgb(235, 235, 235);
+    --btn-action-bd: 1px solid rgba(255, 255, 255, 0.2);
+    --input-login-bd: 1px solid rgba(255, 255, 255, 0.2);
+    --input-register-bd: 1px solid rgba(255, 255, 255, 0.2);
+    /* BORDER HOVER*/
+    --btn-login-bd_hv: 1px solid rgb(215, 215, 215);
+    --btn-action-bd_hv: 1px solid #fff;
+    /* FOCUS */
+    --input-login-fc: 1px solid rgba(255, 255, 255, 0.4);
+    --input-register-fc: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+
+/* commom */
+
+.btn,
+.input {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    margin: 0px auto;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn {
+    padding: 12px;
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+}
+
+.input {
+    padding: 15px;
+}

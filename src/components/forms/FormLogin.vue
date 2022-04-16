@@ -9,9 +9,9 @@
       <a href="#">Esqueceu da senha?</a>
     </p>
     <p class="label-register">É a sua primeira vez no APP?</p>
-    <router-link to="/register" class="btn btn-register">Registrar-se</router-link>
-    <a href="#" class="btn btn-register-social">Entrar com Google</a>
-    <a href="#" class="btn btn-register-social">Entrar com Facebook</a>
+    <button @click="newRegister" class="btn btn-register">Registrar-se</button>
+    <button class="btn btn-register-social">Entrar com Google</button>
+    <button class="btn btn-register-social">Entrar com Facebook</button>
   </div>
 </template>
 
@@ -22,6 +22,9 @@ export default {
   data: ()=>({
   }),
   methods:{
+    newRegister(){
+      this.$emit('newRegister')
+    }
   },
 }
 

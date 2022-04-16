@@ -1,9 +1,9 @@
 <template>
     <div class="form-register">
-        <form>
+        <form @submit.prevent.stop="register">
             <input class="input input-register" type="text" placeholder="Email">
-            <input class="input input-register" type="text" placeholder="Nome de Usuário">
             <input class="input input-register" type="text" placeholder="Nome completo">
+            <input class="input input-register" type="text" placeholder="Nome de Usuário">
             <div class="password">
                 <input class="input input-register input-password" :type="passwordType" placeholder="Senha">
                 <div @click="showPassword()" class="btn btn-show-password">Mostrar</div>
@@ -20,6 +20,9 @@
             passwordType: 'password'
         }),
         methods:{
+            register(){
+                this.$emit('register', 'oi')
+            },
             showPassword(){
                 if(this.passwordType == 'password'){
                     this.passwordType = 'text'
@@ -33,12 +36,13 @@
 
 <style scoped>
 .form-register{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 15px;
-    min-height: 100vh;
-    background: #000;
+   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  background: #000;
+  padding: 15px;
 }
 
 .input-register{
@@ -83,13 +87,13 @@
 
 .btn-register{
     margin-top: 20px;
-    background: var(--btn-action-bk);
-    color: var(--btn-action-cl);
-    border: var(--btn-action-bd);
+    background: var(--btn-login-bk);
+    border: var(--btn-login-bd);
+    color: var(--btn-login-cl);
 }
 
 .btn-register:hover{
-    border: var(--btn-action-bd_hv);
+    border: var(--btn-login-bd_hv);
 }
 
 </style>

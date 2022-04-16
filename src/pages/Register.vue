@@ -7,7 +7,7 @@
 
 <script>
 
-import FormRegister from '@/components/FormRegister.vue'
+import FormRegister from '@/components/forms/FormRegister.vue'
 
 export default {
   name: 'Register',

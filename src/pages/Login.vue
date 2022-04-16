@@ -1,50 +1,55 @@
 <template>
   <div class="login">
-    <div class="presentation">
+    <div class="banner-show">
       <h1>BRASA</h1>
     </div>
     <div class="form-login">
-      <form-login/>
+      <component :is="form" @newRegister="newRegister"></component>
     </div>
   </div>
 </template>
 
 <script>
-import FormLogin from '@/components/FormLogin.vue'
+import FormLogin from "@/components/forms/FormLogin.vue";
+import FormRegister from "@/components/forms/FormRegister.vue";
 
 export default {
-  name: 'Login',
-  data: ()=>({
+  name: "Login",
+  data: () => ({
+    form: "form-login",
   }),
-  methods:{
-    
+  methods: {
+    newRegister() {
+      this.form = "form-register";
+    },
   },
   components: {
-    FormLogin
-  }
-}
+    FormLogin,
+    FormRegister,
+  },
+};
 </script>
 
 <style scoped>
-.login{
+.login {
   display: flex;
 }
 
-.presentation{
+.banner-show {
   display: none;
 }
 
-.form-login, .presentation{
+.form-login {
   width: 100%;
 }
 
-@media screen and (min-width: 768px){
-  .form-login{
-    width:400px;
+@media screen and (min-width: 768px) {
+  .form-login {
+    width: 375px;
   }
-  .presentation{
-    display: block;
+  .banner-show {
+    display: flex;
+    flex: 1;
   }
 }
-
 </style>

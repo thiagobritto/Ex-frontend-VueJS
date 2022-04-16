@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import './assets/global_style/style.css'
+import './assets/styles/style.css'
 
 import DefaultLayout from '@/components/layouts/DefaultLayout.vue'
 import EmptyLayout from '@/components/layouts/EmptyLayout.vue'

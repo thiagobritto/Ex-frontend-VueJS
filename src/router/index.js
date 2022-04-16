@@ -1,16 +1,28 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from '../pages/Login.vue'
+import Home from '../pages/Home.vue'
+
+function lazyLoad(view)
+{
+    return () => import (`../pages/${view}.vue`)
+}
 
 const routes = [{
         path: '/',
-        name: 'Login',
-        component: Login
+        name: 'Home',
+        component: Home,
+        meta: { layout: 'default' }
     },
     {
-        path: '/register',
-        name: 'Register',
-        component: () =>
-            import ('../pages/Register.vue')
+        path: '/login',
+        name: 'Login',
+        component: lazyLoad('Login'),
+        meta: { layout: 'empty' }
+    },
+    {
+        path: '/:pathMatch(.*)',
+        name: 'PageNotFound',
+        component: lazyLoad('PageNotFound'),
+        meta: { layout: 'empty' }       
     }
 ]
 

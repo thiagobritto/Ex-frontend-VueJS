@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 :root {
@@ -27,6 +29,19 @@
     /* FOCUS */
     --input-login-fc: 1px solid rgba(255, 255, 255, 0.4);
     --input-register-fc: 1px solid rgba(255, 255, 255, 0.4);
+
+    /* Layout default */
+    --width--aside: 200px;
+    --heigth--nav: 60px;
+    --heigth--footer: 20px;
+
+    --bk--nav: #22242a;
+    --bk--aside: #2f323a;
+    --bk--footer: #22242a;
+    --bk--btn: #19b3d3;
+    --bk--btn--hover: #0d9dbb;
+    --bk--link--hover: #19b3d3;
+    --color--logo: #1dc4e7;
 }
 
 

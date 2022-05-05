@@ -19,10 +19,10 @@ const routes = [{
         meta: { layout: 'empty' }
     },
     {
-        path: '/register',
-        name: 'Register',
-        component: lazyLoad('Register'),
-        meta: { layout: 'empty' }
+        path: '/product/add',
+        name: 'ProductAdd',
+        component: lazyLoad('ProductAdd'),
+        meta: { layout: 'default' }
     },
     {
         path: '/:pathMatch(.*)',

@@ -17,24 +17,31 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="#">
-                            <span class="material-icons">arrow_drop_up</span>
+                        <router-link to="#" @click="droppable">
+                            <span v-if="droppableClass" class="material-icons">arrow_drop_down</span>
+                            <span v-else class="material-icons">arrow_drop_up</span>
                             <span>Cadastro</span>
                         </router-link>
-                        <ul class="list-droppable">
+                        <ul :class="['list-droppable', {droppableClass}]">
                             <li>
-                                <a href="">
+                                <router-link to="#">
                                     <span class="material-icons">person_add</span>
                                     <span>Cliente</span>
-                                </a>
+                                </router-link>
                             </li>
                             <li>
-                                <a href="">
+                                <router-link to="/product/add">
                                     <span class="material-icons">add</span>
                                     <span>Produto</span>
-                                </a>
+                                </router-link>
                             </li>
                         </ul>
+                    </li>
+                    <li>
+                        <router-link to="#">
+                            <span class="material-icons">logout</span>
+                            <span>Sair</span>
+                        </router-link>
                     </li>
                 </ul>
             </aside>
@@ -50,7 +57,15 @@
 
 <script>
 export default {
-    name: 'DefaultLayout'
+    name: 'DefaultLayout',
+    data: ()=>({
+        droppableClass: false
+    }),
+    methods:{
+        droppable(){
+            this.droppableClass = !this.droppableClass 
+        }
+    }
 }
 </script>
 
@@ -121,9 +136,14 @@ export default {
     border-left: 5px solid #fff;
     color: #fff;
     list-style: none;
+    overflow-y: hidden;
+    height: 0;
+}
+.droppableClass{
+    height: 100%;
 }
 .section{
-    height: 100%;
+    height: 100px;
     width: calc(100% - var(--width--aside));
 }
 .footer{

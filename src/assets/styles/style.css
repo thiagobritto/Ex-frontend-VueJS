@@ -8,40 +8,27 @@
 }
 
 :root {
-    /* BACKGROUND */
-    --btn-login-bk: #fff;
-    --btn-action-bk: darkcyan;
-    --input-login-bk: rgba(255, 255, 255, 0.1);
-    --input-register-bk: rgba(255, 255, 255, 0.1);
-    /* COLOR */
-    --btn-login-cl: #000;
-    --btn-action-cl: #fff;
-    --input-login-cl: #fff;
-    --input-register-cl: #fff;
-    /* BORDER */
-    --btn-login-bd: 1px solid rgb(235, 235, 235);
-    --btn-action-bd: 1px solid rgba(255, 255, 255, 0.2);
-    --input-login-bd: 1px solid rgba(255, 255, 255, 0.2);
-    --input-register-bd: 1px solid rgba(255, 255, 255, 0.2);
-    /* BORDER HOVER*/
-    --btn-login-bd_hv: 1px solid rgb(215, 215, 215);
-    --btn-action-bd_hv: 1px solid #fff;
-    /* FOCUS */
-    --input-login-fc: 1px solid rgba(255, 255, 255, 0.4);
-    --input-register-fc: 1px solid rgba(255, 255, 255, 0.4);
-
-    /* Layout default */
+    /* Color table */
+    --color--1: #22242a;
+    --color--2: #2f323a;
+    --color--3: #19b3d3;
+    --color--4: #0d9dbb;
+    --color--5: #1dc4e7;
+    
+    /* Layout default settings */
     --width--aside: 200px;
     --heigth--nav: 60px;
     --heigth--footer: 20px;
 
-    --bk--nav: #22242a;
-    --bk--aside: #2f323a;
-    --bk--footer: #22242a;
-    --bk--btn: #19b3d3;
-    --bk--btn--hover: #0d9dbb;
-    --bk--link--hover: #19b3d3;
-    --color--logo: #1dc4e7;
+    --bk--nav: var(--color--1);
+    --bk--aside: var(--color--2);
+    --bk--footer: var(--color--1);
+    --bk--link--hover: var(--color--3);
+    --color--logo: var(--color--5);
+
+    /* Home */
+    --box--shadow--card: var(--color--2); 
+    --color--card: var(--color--1); 
 }
 
 
@@ -51,22 +38,37 @@
 .input {
     display: block;
     width: 100%;
-    font-size: 16px;
     margin: 0px auto;
-    border-radius: 12px;
     border: none;
     outline: none;
     text-decoration: none;
     transition: 0.3s;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .btn {
-    padding: 12px;
     cursor: pointer;
     text-align: center;
     user-select: none;
+    background: var(--color--3);
+    font-weight: 500;
+    color: #fff;
+    transition: .4s;
+    transition-property: background;
+}
+
+.btn:hover {
+    background: var(--color--4);
 }
 
 .input {
-    padding: 15px;
+    border: 1px solid rgba(48, 51, 59, .2);
+    transition: .4s;
+    transition-property: border;
+}
+
+.input:focus{
+    border: 1px solid var(--color--5);
 }

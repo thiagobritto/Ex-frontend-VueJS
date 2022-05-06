@@ -31,44 +31,36 @@
     --color--card: var(--color--1); 
 }
 
-
 /* commom */
 
-.btn,
-.input {
-    display: block;
-    width: 100%;
-    margin: 0px auto;
-    border: none;
-    outline: none;
-    text-decoration: none;
-    transition: 0.3s;
-    font-size: 16px;
+select,
+button,
+input[type=tel],
+input[type=text],
+input[type=email],
+input[type=password]
+{
     padding: 10px;
-    border-radius: 5px;
+    font-size: 16px;
+    border: 1px solid var(--color--2);
+    margin: 5px;
+    outline: none;
+    background: #fff;
+    width: 100%;
 }
 
-.btn {
+select,
+button
+{
     cursor: pointer;
-    text-align: center;
-    user-select: none;
-    background: var(--color--3);
-    font-weight: 500;
-    color: #fff;
-    transition: .4s;
-    transition-property: background;
 }
 
-.btn:hover {
-    background: var(--color--4);
-}
-
-.input {
-    border: 1px solid rgba(48, 51, 59, .2);
-    transition: .4s;
-    transition-property: border;
-}
-
-.input:focus{
-    border: 1px solid var(--color--5);
+select:focus,
+button:focus,
+input[type=tel]:focus,
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=password]:focus
+{
+    outline: var(--color--3) solid 1px;
 }

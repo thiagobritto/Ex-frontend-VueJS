@@ -19,9 +19,9 @@ const routes = [{
         meta: { layout: 'empty' }
     },
     {
-        path: '/product/add',
-        name: 'ProductAdd',
-        component: lazyLoad('ProductAdd'),
+        path: '/client/add',
+        name: 'ClientAdd',
+        component: lazyLoad('client/Add'),
         meta: { layout: 'default' }
     },
     {

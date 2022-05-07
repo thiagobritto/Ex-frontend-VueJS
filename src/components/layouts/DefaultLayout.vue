@@ -143,9 +143,25 @@ export default {
   height: 100%;
 }
 .section {
-  height: 100px;
+  height: 100%;
   width: calc(100% - var(--width--aside));
+  background: #fff;
+  overflow-y: scroll;
+  scrollbar-color: var(--color--2) #fff;
+  scrollbar-width: auto;
 }
+.section::-webkit-scrollbar{
+  width: 9px;
+  height: 5px;
+  background: #fff;
+}
+.section::-webkit-scrollbar-thumb{
+  width: 5px !important;
+  background: var(--color--2);
+  border-radius: 3px 5px 5px 3px;
+  border-right: 3px solid #fff;
+}
+
 .footer {
   height: var(--heigth--footer);
   background: var(--bk--footer);

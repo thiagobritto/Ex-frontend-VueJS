@@ -25,6 +25,12 @@ const routes = [{
         meta: { layout: 'default' }
     },
     {
+        path: '/product/add',
+        name: 'ProductAdd',
+        component: lazyLoad('product/Add'),
+        meta: { layout: 'default' }
+    },
+    {
         path: '/:pathMatch(.*)',
         name: 'PageNotFound',
         component: lazyLoad('PageNotFound'),

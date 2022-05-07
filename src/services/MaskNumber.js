@@ -14,7 +14,7 @@ MaskNumber.mask = function(baseNumber, maskNumber = '0')
     return this.response.join('')
 }
 
-MaskNumber.price = function(baseNumber, maskNumber = '000000000.00')
+MaskNumber.money = function(baseNumber, maskNumber = '000000000.00')
 {
     this.baseArray = prepare(removeNaN(baseNumber))
     this.maskArray = prepare(maskNumber)
@@ -33,7 +33,7 @@ MaskNumber.price = function(baseNumber, maskNumber = '000000000.00')
     return this.response.join('')
 }
 
-MaskNumber.numeric = function(baseNumber, maskNumber = '00000000.000')
+MaskNumber.volume = function(baseNumber, maskNumber = '00000000.000')
 {
     this.baseArray = prepare(removeNaN(baseNumber))
     this.maskArray = prepare(maskNumber)

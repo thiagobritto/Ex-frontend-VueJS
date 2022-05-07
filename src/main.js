@@ -16,6 +16,10 @@ app.component('default-layout', DefaultLayout)
 app.component('empty-layout', EmptyLayout)
 app.component('navbar-layout', NavbarLayout)
 
+app.directive('focus', {
+    mounted: (el) => el.focus()
+})
+
 app.use(store)
 app.use(router)
 app.mount('#app')

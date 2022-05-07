@@ -4,40 +4,36 @@
       <h2>Cadastro de produtos</h2>
       <form>
         <div>
-          <input 
-            type="text" 
+          <input
+            type="text"
             v-model="form.code"
             placeholder="Código"
             disabled
             class="code"
-          >
-          <input 
-            type="text" 
+          />
+          <input
+            type="text"
             v-model="form.description"
             placeholder="Descrição"
             v-focus
             required
-          >
+          />
         </div>
         <div>
-          <input 
-            type="text" 
-            v-model="form.provide"
-            placeholder="Fornecedor"
-          >
-          <input 
-            type="text" 
+          <input type="text" v-model="form.provide" placeholder="Fornecedor" />
+          <input
+            type="text"
             v-model="form.manufacturer"
             placeholder="Fabricante"
-          >
+          />
         </div>
         <div>
-          <input 
-            type="text" 
+          <input
+            type="text"
             v-model="form.ncm"
             v-mask="'########'"
             placeholder="NCM"
-          >
+          />
           <select v-model="form.category">
             <option value="sem categoria">sem categoria</option>
             <option value="limpeza">limpeza</option>
@@ -53,15 +49,15 @@
         </div>
         <div class="money">
           <span>R$</span>
-          <input 
-            type="text" 
+          <input
+            type="text"
             v-model="priceProxy"
             v-money="'000.000.000,00'"
             placeholder="Preço"
             maxlength="14"
             ref="price"
             required
-          >
+          />
         </div>
         <div>
           <button>Adicionar</button>
@@ -76,6 +72,14 @@
   </div>
 </template>
 
+
+
+
+
+
+
+
+
 <script>
 import { mask } from "vue-the-mask";
 import MaskNumber from "@/services/MaskNumber";
@@ -85,38 +89,46 @@ export default {
   name: "ProductAdd",
   data: () => ({
     form: {
-      code: '',
-      manufacturer: '',
-      provider: '',
-      description: '',
-      ncm: '',
-      category: 'sem categoria',
-      unity: 'und',
-      price: '0.00'
+      code: "",
+      manufacturer: "",
+      provider: "",
+      description: "",
+      ncm: "",
+      category: "sem categoria",
+      unity: "und",
+      price: "0.00",
     },
-    help: '',
+    help: "",
   }),
   directives: {
     mask,
-    money: MoneyMask
+    money: MoneyMask,
   },
   computed: {
     priceProxy: {
-      get(){
-        return MaskNumber.money(this.form.price, '000.000.000,00')
+      get() {
+        return MaskNumber.money(this.form.price, "000.000.000,00");
       },
-      set(val){
-        this.form.price = MaskNumber.money(val, '000000000.00')
-      }
-    }
+      set(val) {
+        this.form.price = MaskNumber.money(val, "000000000.00");
+      },
+    },
   },
   methods: {
     setFocus() {
-      this.$refs.price.focus()
-    }
-  }
+      this.$refs.price.focus();
+    },
+  },
 };
 </script>
+
+
+
+
+
+
+
+
 
 <style scoped>
 .container-product-add {
@@ -144,7 +156,7 @@ export default {
   margin: 5px;
 }
 
-.code{
+.code {
   width: 100px;
   text-align: center;
 }

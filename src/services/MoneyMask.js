@@ -11,10 +11,9 @@ export default {
 
         }
     }
-}   
+}
 
-function event(name)
-{
+function event(name) {
     var evt = document.createEvent('Event')
     evt.initEvent(name, true, true)
     return evt

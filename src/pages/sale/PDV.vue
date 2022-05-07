@@ -77,6 +77,17 @@
   </div>
 </template>
 
+
+
+
+
+
+
+
+
+
+
+
 <script>
 export default {
   name: "SalePDV",
@@ -101,17 +112,27 @@ export default {
       for (let x in this.form) {
         if (!this.form[x]) {
           this.$refs.code.focus();
-          return
+          return;
         }
         list[x] = this.form[x];
         this.form[x] = "";
       }
-      this.list.push(list)
-      this.$refs.code.focus()
+      this.list.push(list);
+      this.$refs.code.focus();
     },
   },
 };
 </script>
+
+
+
+
+
+
+
+
+
+
 
 <style scoped>
 .pdv {

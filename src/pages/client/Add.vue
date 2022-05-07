@@ -15,11 +15,12 @@
           <input type="text" placeholder="Sobrenome" v-model="form.lastName" />
         </div>
         <div>
-          <input 
-          type="email" 
-          placeholder="E-mail" 
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-          v-model="form.email" />
+          <input
+            type="email"
+            placeholder="E-mail"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+            v-model="form.email"
+          />
         </div>
         <div>
           <input
@@ -101,11 +102,20 @@
   </div>
 </template>
 
+
+
+
+
+
+
+
+
+
 <script>
 import { mask } from "vue-the-mask";
 
 export default {
-  name: 'ClientAdd',
+  name: "ClientAdd",
   data: () => ({
     form: {
       firstName: "",
@@ -127,7 +137,7 @@ export default {
     help: "",
   }),
   directives: {
-    mask
+    mask,
   },
   methods: {
     setEndereco() {
@@ -155,6 +165,16 @@ export default {
   },
 };
 </script>
+
+
+
+
+
+
+
+
+
+
 
 <style scoped>
 .container-client-add {

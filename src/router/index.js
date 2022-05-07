@@ -31,6 +31,12 @@ const routes = [{
         meta: { layout: 'default' }
     },
     {
+        path: '/sale/pdv',
+        name: 'SalePDV',
+        component: lazyLoad('sale/PDV'),
+        meta: { layout: 'empty' }
+    },
+    {
         path: '/:pathMatch(.*)',
         name: 'PageNotFound',
         component: lazyLoad('PageNotFound'),

@@ -1,7 +1,7 @@
 <template>
   <div class="default-layout">
     <nav class="nav">
-      <h1 class="logo">@Thomic</h1>
+      <h1 class="logo">THOMC /////</h1>
     </nav>
     <main class="main">
       <aside class="aside">
@@ -11,7 +11,7 @@
         <h3 class="name">Jane</h3>
         <ul class="list">
           <li>
-            <router-link to="#">
+            <router-link to="/sale/pdv">
               <span class="material-icons">local_offer</span>
               <span>Vender</span>
             </router-link>
@@ -81,7 +81,6 @@ export default {
   color: var(--color--logo);
   font-size: 28px;
   font-weight: 500;
-  letter-spacing: -1.5px;
   margin-left: 15px;
 }
 .main {

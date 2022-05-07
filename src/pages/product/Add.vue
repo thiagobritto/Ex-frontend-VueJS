@@ -59,6 +59,7 @@
             v-money="'000.000.000,00'"
             placeholder="Preço"
             maxlength="14"
+            ref="price"
             required
           >
         </div>
@@ -107,6 +108,11 @@ export default {
       set(val){
         this.form.price = MaskNumber.money(val, '000000000.00')
       }
+    }
+  },
+  methods: {
+    setFocus() {
+      this.$refs.price.focus()
     }
   }
 };

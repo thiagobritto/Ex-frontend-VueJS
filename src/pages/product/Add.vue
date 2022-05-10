@@ -47,16 +47,25 @@
             <option value="litro">litro</option>
           </select>
         </div>
-        <div class="money">
-          <span>R$</span>
+        <div>
+          <div class="money">
+            <span>R$</span>
+            <input
+              type="text"
+              v-model="priceProxy"
+              v-money="'000.000.000,00'"
+              placeholder="Preço"
+              maxlength="14"
+              ref="price"
+              required
+            />
+          </div>
           <input
             type="text"
-            v-model="priceProxy"
-            v-money="'000.000.000,00'"
-            placeholder="Preço"
-            maxlength="14"
-            ref="price"
-            required
+            v-model="stockProxy"
+            placeholder="Estoque"
+            maxlength="12"
+            v-value="'00000000.000'"
           />
         </div>
         <div>
@@ -81,9 +90,9 @@
 
 
 <script>
+
 import { mask } from "vue-the-mask";
 import MaskNumber from "@/services/MaskNumber";
-import MoneyMask from "@/services/MoneyMask";
 
 export default {
   name: "ProductAdd",
@@ -97,12 +106,28 @@ export default {
       category: "sem categoria",
       unity: "und",
       price: "0.00",
+      stock: "",
     },
     help: "",
   }),
   directives: {
     mask,
-    money: MoneyMask,
+    money: {
+      mounted(el, binding) {
+        el.oninput = (evt) => {
+          if (!evt.isTrusted) return;
+          el.value = MaskNumber.money(el.value, binding.value);
+        }
+      },
+    },
+    value: {
+      mounted(el, binding) {
+        el.oninput = (evt) => {
+          if (!evt.isTrusted) return;
+          el.value = MaskNumber.volume(el.value, binding.value);
+        };
+      },
+    },
   },
   computed: {
     priceProxy: {
@@ -111,6 +136,14 @@ export default {
       },
       set(val) {
         this.form.price = MaskNumber.money(val, "000000000.00");
+      },
+    },
+    stockProxy: {
+      get() {
+        return MaskNumber.volume(this.form.stock, "00000000.000");
+      },
+      set(val) {
+        this.form.stock = MaskNumber.volume(val, "00000000.000");
       },
     },
   },

@@ -8,11 +8,11 @@
             type="text"
             placeholder="Name"
             v-focus
-            v-model="form.firstName"
+            v-model="form.first_name"
             title="Preencha com um nome"
             required
           />
-          <input type="text" placeholder="Sobrenome" v-model="form.lastName" />
+          <input type="text" placeholder="Sobrenome" v-model="form.last_name" />
         </div>
         <div>
           <input
@@ -118,8 +118,8 @@ export default {
   name: "ClientAdd",
   data: () => ({
     form: {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       email: "",
       cpf_cnpj: "",
       phone: "",

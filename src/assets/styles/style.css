@@ -32,7 +32,7 @@
 }
 
 /* commom */
-
+a.btn,
 select,
 button,
 input[type=tel],
@@ -48,12 +48,16 @@ input[type=password]
     width: 100%;
 }
 
+a.btn,
 select,
 button
 {
     cursor: pointer;
+    user-select: none;
+    text-decoration: none;
 }
 
+a.btn:focus,
 select:focus,
 button:focus,
 input[type=tel]:focus,
@@ -62,6 +66,36 @@ input[type=email]:focus,
 input[type=password]:focus
 {
     outline: var(--color--3) solid 1px;
+}
+
+a.btn,
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s;
+    transition-property: all;
+}
+
+a.btn-forward,
+button.btn-forward {
+    background-color: var(--color--4);
+    border: none;
+    color: #fff;
+}
+
+a.btn-forward:hover,
+button.btn-forward:hover {
+    background-color: var(--color--3);
+}
+
+table {
+    border-spacing: 0;
+    width: 100%;
+}
+
+table td, table th {
+    white-space: nowrap;
 }
 
 .money{

@@ -3,12 +3,12 @@
 <template>
   <section>
     <header>
-      <h2>Cadastrp de cliente</h2>
+      <h2>Editar cliente: {{fill.id_client}} </h2>
     </header>
     <main>
-      <FormPageClient @submitform="submit" />
+      <FormPageClient :fillable="fill" @submitform="submit" />
       <div class="help">
-        {{ help }}
+        
       </div>
     </main>  
   </section>
@@ -21,19 +21,33 @@
 <script>
 
 import FormPageClient  from '@/components/FormPageClient.vue'
+import { mapGetters }  from 'vuex'
 
 export default {
-  name: "ClientAdd",
+  name: "ClientUpdate",
+  
   data: () => ({
-    help: ''
+    help: {},
+    fill: {}
   }),
+  
   methods: {
     submit(form){
       this.teste = form
     }
   },
+  
   components: {
     FormPageClient
+  },
+  
+  computed: {
+    ...mapGetters(['tmp']),
+  },
+
+  created(){
+    if(this.tmp.id_client)
+      this.fill = this.tmp
   }
 };
 

@@ -6,7 +6,9 @@
       <h2>Cadastrp de cliente</h2>
     </header>
     <main>
-      <FormPageClient @submitform="submit" />
+      <FormPageClient 
+        @submitform="submit" 
+        labelbutton="Resgistrar"/>
       <div class="help">
         {{ help }}
       </div>
@@ -24,14 +26,17 @@ import FormPageClient  from '@/components/FormPageClient.vue'
 
 export default {
   name: "ClientAdd",
+
   data: () => ({
     help: ''
   }),
+  
   methods: {
     submit(form){
       this.teste = form
     }
   },
+  
   components: {
     FormPageClient
   }

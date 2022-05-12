@@ -85,7 +85,7 @@
       <input type="text" placeholder="Complemento" v-model="form.address2" />
     </div>
     <div>
-      <button>Adicionar</button>
+      <button>{{labelbutton}}</button>
     </div>
   </form>
 </template>
@@ -100,7 +100,8 @@ import { mask } from "vue-the-mask";
 
 export default {
   name: "ClientAdd",
-  data: () => ({
+
+data: () => ({
     form: {
       first_name: "",
       last_name: "",
@@ -119,15 +120,22 @@ export default {
       disabledCity: false,
     },
   }),
+
   props: {
     fillable: {
       type: Object,
       default: new Object
+    },
+    labelbutton: {
+      type: String,
+      default: 'send'
     }
   },
+  
   directives: {
     mask,
   },
+  
   methods: {
     setEndereco() {
       const cep = this.form.zipcode.replace("-", "");
@@ -155,11 +163,13 @@ export default {
       this.$emit('submitform', this.form)
     }
   },
+  
   mounted(){
     if(this.fillable.id_client)
       this.form = this.fillable
   }
 };
+
 </script>
 
 

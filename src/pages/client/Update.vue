@@ -2,11 +2,14 @@
 
 <template>
   <section>
-    <header>
-      <h2>Editar cliente: {{fill.id_client}} </h2>
-    </header>
+    <header-back 
+      :title="'Cliente ' + fill.id_client">
+    </header-back>    
     <main>
-      <FormPageClient :fillable="fill" @submitform="submit" />
+      <FormPageClient 
+        :fillable="fill" 
+        @submitform="submit"
+        labelbutton="Atualizar"/>
       <div class="help">
         
       </div>
@@ -20,8 +23,9 @@
 
 <script>
 
-import FormPageClient  from '@/components/FormPageClient.vue'
-import { mapGetters }  from 'vuex'
+import { mapGetters } from 'vuex'
+import FormPageClient from '@/components/FormPageClient.vue'
+import HeaderBack from '@/components/headers/HeaderBack'
 
 export default {
   name: "ClientUpdate",
@@ -38,7 +42,8 @@ export default {
   },
   
   components: {
-    FormPageClient
+    FormPageClient,
+    HeaderBack
   },
   
   computed: {
@@ -58,10 +63,6 @@ export default {
 <!-- CSS -->
 
 <style scoped>
-
-section header {
-  padding: 10px;
-}
 
 section main {
   display: flex;

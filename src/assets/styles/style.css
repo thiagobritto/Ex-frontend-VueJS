@@ -38,6 +38,7 @@ button,
 input[type=tel],
 input[type=text],
 input[type=email],
+input[type=search],
 input[type=password]
 {
     padding: 10px;
@@ -63,6 +64,7 @@ button:focus,
 input[type=tel]:focus,
 input[type=text]:focus,
 input[type=email]:focus,
+input[type=search]:focus,
 input[type=password]:focus
 {
     outline: var(--color--3) solid 1px;
@@ -90,6 +92,7 @@ button.btn-forward:hover {
 }
 
 table {
+    border-collapse: collapse;
     border-spacing: 0;
     width: 100%;
 }
@@ -120,6 +123,7 @@ table td, table th {
 .scrollbar-hide{
     scrollbar-width: none;
 }
+
 .scrollbar-hide::-webkit-scrollbar{
     display: none;
 }

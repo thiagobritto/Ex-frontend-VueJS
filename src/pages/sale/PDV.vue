@@ -1,3 +1,5 @@
+<!-- HTML -->
+
 <template>
   <div class="pdv">
     <div class="sale-display">
@@ -79,18 +81,12 @@
 
 
 
-
-
-
-
-
-
-
-
+<!-- JavaScript -->
 
 <script>
 export default {
   name: "SalePDV",
+
   data: () => ({
     form: {
       code: "",
@@ -102,11 +98,13 @@ export default {
     list: [],
     subtotal: [],
   }),
+
   methods: {
     soma(val, i) {
       this.subtotal[i] = val;
       return val;
     },
+
     addProd() {
       const list = {};
       for (let x in this.form) {
@@ -126,13 +124,7 @@ export default {
 
 
 
-
-
-
-
-
-
-
+<!-- CSS -->
 
 <style scoped>
 .pdv {
@@ -142,23 +134,29 @@ export default {
   background: #fff;
   padding: 10px;
 }
+
 .sale-display {
   flex: 1;
   padding: 10px;
 }
+
 .sale-display h2 {
   margin-bottom: 20px;
 }
+
 .sale-display form div {
   display: flex;
 }
+
 .sale-display form div input,
 .sale-display form div button {
   margin: 5px;
 }
+
 input.code {
   width: 100px;
 }
+
 .note-display {
   width: 400px;
   background: #fff;
@@ -168,36 +166,45 @@ input.code {
   border: 1px solid var(--color--2);
   overflow-y: scroll;
 }
+
 .note-header {
   display: flex;
   margin: 20px 10px;
 }
+
 .note-header > * {
   flex: 1;
 }
+
 .note-footer {
   margin: 20px 0;
   border-top: 1px solid #000;
   padding: 5px 0;
 }
+
 .note-display table {
   width: 100%;
   border-spacing: 0;
 }
+
 .note-display table thead tr th {
   padding: 2px;
   border-bottom: 1px solid #000;
 }
+
 .note-display table tbody tr td {
   padding: 2px;
   vertical-align: top;
 }
+
 .note-display table tbody tr:first-child td {
   padding-top: 10px;
 }
+
 .center {
   text-align: center;
 }
+
 .rigth {
   text-align: right;
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>Pagina nao ebcontrada</h1>
+      <h1>Pagina nao encontrada</h1>
   </div>
 </template>
 

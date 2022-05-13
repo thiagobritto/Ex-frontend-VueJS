@@ -1,9 +1,16 @@
+<!--HTML-->
+
 <template>
-  <div class="body">
+  <section class="home">
     <div class="statistics">
       <div class="message">
         <h3>Aviso!</h3>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque distinctio debitis error iste doloribus porro sunt recusandae repudiandae quo, quidem quia? Doloremque ipsa reiciendis distinctio at corporis dolor voluptas magni.</p>
+        <p>
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque
+          distinctio debitis error iste doloribus porro sunt recusandae
+          repudiandae quo, quidem quia? Doloremque ipsa reiciendis distinctio at
+          corporis dolor voluptas magni.
+        </p>
       </div>
       <div class="ranking">
         <h3>Ranking</h3>
@@ -12,22 +19,32 @@
         <h3>Funcionario do mês</h3>
       </div>
     </div>
-  </div>
+  </section>
 </template>
+
+
+
+<!--JavaScript-->
 
 <script>
 export default {
-
-}
+  name: "Home",
+  components: {},
+};
 </script>
 
+
+
+<!--CSS-->
+
 <style scoped>
-.statistics{
+.statistics {
   display: flex;
   height: 120px;
   padding: 10px;
 }
-.statistics div{
+
+.statistics div {
   flex: 1;
   height: 100%;
   margin: 10px;
@@ -37,13 +54,13 @@ export default {
   overflow: hidden;
   color: var(--color--card);
 }
-.message{
+.message {
   background: lightcoral;
 }
-.ranking{
+.ranking {
   background: lightblue;
 }
-.chapion{
+.chapion {
   background: lightgreen;
 }
 </style>

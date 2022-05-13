@@ -2,9 +2,9 @@
 
 <template>
   <section class="default-layout">
-    <nav class="nav">
+    <header>
       <h1 class="logo">THOMC /////</h1>
-    </nav>
+    </header>
     <section class="dashboard">
       <MenuDefaultLayout/>
       <section class="page">
@@ -41,7 +41,7 @@ export default {
 
 <style scoped>
 
-.nav {
+header {
   display: flex;
   align-items: center;
   height: var(--heigth--nav);
@@ -66,7 +66,6 @@ export default {
 section.page {
   height: 100%;
   width: calc(100% - var(--width--aside));
-  background: #fff;
   overflow-y: scroll;
   scrollbar-color: var(--color--2) #fff;
   scrollbar-width: auto;

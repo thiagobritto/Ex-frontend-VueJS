@@ -6,7 +6,7 @@
       <img src="@/assets/images/user.jpg" alt="" />
     </figure>
     <h3 class="name">Jane</h3>
-    <ul class="list">
+    <ul class="list scrollable-y-dark">
       <li>
         <router-link to="/sale/pdv">
           <span class="material-icons">local_offer</span>
@@ -73,7 +73,7 @@ export default {
   height: 100%;
   background: var(--bk--aside);
   width: var(--width--aside);
-  overflow-y: scroll;
+  overflow: hidden;
 }
 
 .image {
@@ -100,6 +100,7 @@ export default {
 
 .list {
   list-style: none;
+  height: 100%;
 }
 
 .list a {

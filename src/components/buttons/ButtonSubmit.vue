@@ -1,60 +1,68 @@
+<!--- HTML -->
+
 <template>
-  <a class="btn" @click.prevent="back">
+  <button :class="{ primary }">
     <slot>{{title}}</slot>
-  </a>
+  </button>
 </template>
 
+
+
+<!--- JavaScript -->
+
 <script>
+
 export default {
 
-  name: 'RoeuterBack',
-  
+  name: 'SubmitForm',
+
   props: {
-    go: {
-      type: String,
-      default: '-1'
+    primary: {
+      type: Boolean,
+      default: false
     },
     title: {
       type: String,
-      default: 'Back'
-    }
-  },
-
-  methods: {
-    back() {
-      this.$router.go(this.go)
+      default: 'Button'
     }
   }
+  
 }
 
 </script>
 
+
+
+
+<!--- CSS -->
+
 <style scoped>
 
-a {
+button {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.3s;
+  transition: .3s;
   transition-property: all;
-  width: 60px;
+  width: 100%;
   padding: 10px;
   font-size: 16px;
   border: 1px solid var(--color--2);
+  outline: none;
+  cursor: pointer;
   user-select: none;
   text-decoration: none;
   background: #fff;
-  cursor: pointer;
 }
 
-a.primary {
+button.primary {
   background-color: var(--color--4);
-  border: none;
-  color: #fff;
+    border: none;
+    color: #fff;
 }
 
-a.primary:hover {
-  background-color: var(--color--3);
+button.primary:hover {
+    background-color: var(--color--3);
 }
 
 </style>

@@ -55,7 +55,7 @@ header div {
 }
 
 header div h2 {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 
 </style>

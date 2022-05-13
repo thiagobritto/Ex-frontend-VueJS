@@ -2,11 +2,11 @@
 
 <template>
   <section>
-    <header-back title="Gerenciador de clientes">
+    <HeaderBack title="Gerenciador de produtos">
       <nav>
-        <Router link="/client/add" primary>
+        <Router link="/product/add" primary>
           <span class="material-icons">add</span>
-          <span>Novo cliente</span>
+          <span>Adeicionar</span>
         </Router>
         <form>
           <input
@@ -22,7 +22,7 @@
           </select>
         </form>
       </nav>
-    </header-back>
+    </HeaderBack>
 
     <main>
       <div class="table scrollable">
@@ -77,7 +77,7 @@ import HeaderBack from '@/components/headers/HeaderBack'
 import Router from '@/components/buttons/Router'
 
 export default {
-  name: "ClientManage",
+  name: "ProductManage",
 
   data: () => ({
     dataClient: [],

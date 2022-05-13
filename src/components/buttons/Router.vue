@@ -1,32 +1,28 @@
 <template>
-  <a class="btn" @click.prevent="back">
-    <slot>{{title}}</slot>
-  </a>
+  <router-link :to="link" :class="{ primary }">
+    <slot>{{ title }}</slot>
+  </router-link>
 </template>
 
 <script>
 export default {
+  name: "Roeuter",
 
-  name: 'RoeuterBack',
-  
   props: {
-    go: {
+    link: {
       type: String,
-      default: '-1'
+      default: "",
     },
     title: {
       type: String,
-      default: 'Back'
-    }
+      default: "link",
+    },
+    primary: {
+      type: Boolean,
+      default: false,
+    },
   },
-
-  methods: {
-    back() {
-      this.$router.go(this.go)
-    }
-  }
-}
-
+};
 </script>
 
 <style scoped>
@@ -37,14 +33,13 @@ a {
   justify-content: center;
   transition: 0.3s;
   transition-property: all;
-  width: 60px;
+  width: 100%;
   padding: 10px;
   font-size: 16px;
   border: 1px solid var(--color--2);
   user-select: none;
   text-decoration: none;
   background: #fff;
-  cursor: pointer;
 }
 
 a.primary {

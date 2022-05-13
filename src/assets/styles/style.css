@@ -14,7 +14,7 @@
     --color--3: #19b3d3;
     --color--4: #0d9dbb;
     --color--5: #1dc4e7;
-    
+
     /* Layout default settings */
     --width--aside: 200px;
     --heigth--nav: 60px;
@@ -27,20 +27,18 @@
     --color--logo: var(--color--5);
 
     /* Home */
-    --box--shadow--card: var(--color--2); 
-    --color--card: var(--color--1); 
+    --box--shadow--card: var(--color--2);
+    --color--card: var(--color--1);
 }
 
 /* commom */
-a.btn,
+
 select,
-button,
 input[type=tel],
 input[type=text],
 input[type=email],
 input[type=search],
-input[type=password]
-{
+input[type=password] {
     padding: 10px;
     font-size: 16px;
     border: 1px solid var(--color--2);
@@ -49,46 +47,19 @@ input[type=password]
     width: 100%;
 }
 
-a.btn,
-select,
-button
-{
+select { 
     cursor: pointer;
     user-select: none;
     text-decoration: none;
 }
 
-a.btn:focus,
 select:focus,
-button:focus,
 input[type=tel]:focus,
 input[type=text]:focus,
 input[type=email]:focus,
 input[type=search]:focus,
-input[type=password]:focus
-{
+input[type=password]:focus {
     outline: var(--color--3) solid 1px;
-}
-
-a.btn,
-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: .3s;
-    transition-property: all;
-}
-
-a.btn-forward,
-button.btn-forward {
-    background-color: var(--color--4);
-    border: none;
-    color: #fff;
-}
-
-a.btn-forward:hover,
-button.btn-forward:hover {
-    background-color: var(--color--3);
 }
 
 table {
@@ -97,15 +68,18 @@ table {
     width: 100%;
 }
 
-table td, table th {
+table td,
+table th {
     white-space: nowrap;
 }
 
-.money{
+/* review */
+
+.money {
     position: relative;
 }
 
-.money span{
+.money span {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -116,14 +90,72 @@ table td, table th {
     width: 35px;
 }
 
-.money input{
+.money input {
     padding-left: 35px;
 }
 
-.scrollbar-hide{
+.scrollbar-hide {
     scrollbar-width: none;
 }
 
-.scrollbar-hide::-webkit-scrollbar{
+.scrollbar-hide::-webkit-scrollbar {
     display: none;
+}
+
+.scrollable {
+    padding-bottom: 15px;
+    overflow: scroll;
+    scrollbar-color: var(--color--2) #fff;
+    scrollbar-width: auto;
+}
+
+.scrollable-y{
+    overflow-y: scroll;
+    scrollbar-color: var(--color--2) #fff;
+    scrollbar-width: auto;
+}
+
+.scrollable::-webkit-scrollbar, 
+.scrollable-y::-webkit-scrollbar{
+    width: 6px;
+    height: 6px;
+    background: #FFFFFF;
+}
+
+.scrollable::-webkit-scrollbar-thumb,
+.scrollable-y::-webkit-scrollbar-thumb {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--color--2);
+}
+
+.scrollable-dark {
+    padding-bottom: 15px;
+    overflow: scroll;
+    scrollbar-color: #fff var(--color--2);
+    scrollbar-width: auto;
+}
+
+.scrollable-y-dark{
+    overflow-y: scroll;
+    scrollbar-color: #fff var(--color--2);
+    scrollbar-width: auto;
+}
+
+.scrollable-dark::-webkit-scrollbar, 
+.scrollable-y-dark::-webkit-scrollbar{
+    width: 7px;
+    height: 7px;
+    background: var(--color--2);
+}
+
+.scrollable-dark::-webkit-scrollbar-thumb,
+.scrollable-y-dark::-webkit-scrollbar-thumb {
+    width: 7px;
+    height: 7px;
+    border-radius: 3px;
+    background: #FFFFFF;
+    border: 1px solid var(--color--2);
+    cursor: pointer;
 }

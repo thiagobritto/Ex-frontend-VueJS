@@ -2,9 +2,7 @@
 
 <template>
   <section>
-    <header>
-      <h2>Cadastrp de cliente</h2>
-    </header>
+    <HeaderBack title="Cadastro de cliente"/>
     <main>
       <FormPageClient 
         @submitform="submit" 
@@ -22,7 +20,8 @@
 
 <script>
 
-import FormPageClient  from '@/components/FormPageClient.vue'
+import FormPageClient  from '@/components/forms/FormPageClient.vue'
+import HeaderBack  from '@/components/headers/HeaderBack'
 
 export default {
   name: "ClientAdd",
@@ -38,7 +37,8 @@ export default {
   },
   
   components: {
-    FormPageClient
+    FormPageClient,
+    HeaderBack
   }
 };
 
@@ -50,14 +50,10 @@ export default {
 
 <style scoped>
 
-section header {
-  padding: 10px;
-}
-
 section main {
   display: flex;
   flex-wrap: wrap;
-  padding: 10px;
+  padding: 0 10px;
 }
 
 section main div,

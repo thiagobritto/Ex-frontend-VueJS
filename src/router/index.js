@@ -1,17 +1,28 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/Home.vue'
 
-function lazyLoad(view)
-{
-    return () => import (`../pages/${view}.vue`)
+import client from './client'
+import product from './product'
+
+const lazyLoad = (view) => {
+    return () => import(`@/pages/${view}.vue`)
 }
 
-const routes = [{
+const routes = [
+    {
         path: '/',
         name: 'Home',
         component: Home,
         meta: { layout: 'default' }
     },
+    {
+        path: '/:pathMatch(.*)',
+        name: 'PageNotFound',
+        component: lazyLoad('PageNotFound'),
+        meta: { layout: 'empty' }
+    },
+    ...client,
+    ...product,
     {
         path: '/login',
         name: 'Login',
@@ -19,40 +30,10 @@ const routes = [{
         meta: { layout: 'empty' }
     },
     {
-        path: '/client/add',
-        name: 'ClientAdd',
-        component: lazyLoad('client/Add'),
-        meta: { layout: 'default' }
-    },
-    {
-        path: '/client/manage',
-        name: 'ClientManage',
-        component: lazyLoad('client/Manage'),
-        meta: { layout: 'default' }
-    },
-    {
-        path: '/client/update',
-        name: 'ClientUpdate',
-        component: lazyLoad('client/Update'),
-        meta: { layout: 'default' }
-    },
-    {
-        path: '/product/add',
-        name: 'ProductAdd',
-        component: lazyLoad('product/Add'),
-        meta: { layout: 'default' }
-    },
-    {
         path: '/sale/pdv',
         name: 'SalePDV',
         component: lazyLoad('sale/PDV'),
         meta: { layout: 'empty' }
-    },
-    {
-        path: '/:pathMatch(.*)',
-        name: 'PageNotFound',
-        component: lazyLoad('PageNotFound'),
-        meta: { layout: 'empty' }       
     }
 ]
 

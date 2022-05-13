@@ -5,7 +5,7 @@
     <div>
       <input
         type="text"
-        placeholder="Nome"
+        placeholder="Nome *"
         v-focus
         v-model="form.first_name"
         title="Preencha com um nome"
@@ -30,7 +30,7 @@
       />
       <input
         type="text"
-        placeholder="Telefone"
+        placeholder="Telefone *"
         pattern=".{18,}"
         v-mask="['+55 (##) ####-####', '+55 (##) #####-####']"
         v-model="form.phone"
@@ -42,7 +42,7 @@
     <div>
       <input
         type="text"
-        placeholder="Logradouro"
+        placeholder="Logradouro *"
         v-model="form.address"
         title="Preencha com um enderoço"
         required
@@ -58,7 +58,7 @@
     <div>
       <input
         type="text"
-        placeholder="Bairro"
+        placeholder="Bairro *"
         v-model="form.district"
         title="Preencha com um bairro"
         required
@@ -74,7 +74,7 @@
     <div>
       <input
         type="text"
-        placeholder="Cidade"
+        placeholder="Cidade *"
         v-model="form.city"
         :disabled="formState.disabledCity"
         title="Preencha com uma cidade"
@@ -85,7 +85,7 @@
       <input type="text" placeholder="Complemento" v-model="form.address2" />
     </div>
     <div>
-      <button>{{labelbutton}}</button>
+      <ButtonSubmit :title="labelbutton" />
     </div>
   </form>
 </template>
@@ -95,13 +95,13 @@
 <!-- JavaScript -->
 
 <script>
-
 import { mask } from "vue-the-mask";
+import ButtonSubmit from "@/components/buttons/ButtonSubmit";
 
 export default {
   name: "ClientAdd",
 
-data: () => ({
+  data: () => ({
     form: {
       first_name: "",
       last_name: "",
@@ -124,18 +124,18 @@ data: () => ({
   props: {
     fillable: {
       type: Object,
-      default: new Object
+      default: new Object(),
     },
     labelbutton: {
       type: String,
-      default: 'send'
-    }
+      default: "send",
+    },
   },
-  
+
   directives: {
     mask,
   },
-  
+
   methods: {
     setEndereco() {
       const cep = this.form.zipcode.replace("-", "");
@@ -159,17 +159,19 @@ data: () => ({
           });
       }
     },
-    send(){
-      this.$emit('submitform', this.form)
-    }
+    send() {
+      this.$emit("submitform", this.form);
+    },
   },
-  
-  mounted(){
-    if(this.fillable.id_client)
-      this.form = this.fillable
-  }
-};
 
+  components: {
+    ButtonSubmit,
+  },
+
+  mounted() {
+    if (this.fillable.id_client) this.form = this.fillable;
+  },
+};
 </script>
 
 
@@ -177,7 +179,6 @@ data: () => ({
 <!-- CSS -->
 
 <style scoped>
-
 form {
   width: 100%;
 }
@@ -187,13 +188,12 @@ form div {
   margin-bottom: 10px;
 }
 
-form div {
-  margin-bottom: 10px;
-}
-
 form div input,
 form div button {
   margin: 0 5px;
 }
 
+.input-number {
+  width: 33.3333%;
+}
 </style>

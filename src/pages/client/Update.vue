@@ -24,7 +24,7 @@
 <script>
 
 import { mapGetters } from 'vuex'
-import FormPageClient from '@/components/FormPageClient.vue'
+import FormPageClient from '@/components/forms/FormPageClient.vue'
 import HeaderBack from '@/components/headers/HeaderBack'
 
 export default {
@@ -67,7 +67,7 @@ export default {
 section main {
   display: flex;
   flex-wrap: wrap;
-  padding: 10px;
+  padding: 0 10px;
 }
 
 section main div,

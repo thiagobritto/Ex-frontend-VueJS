@@ -3,25 +3,16 @@
 <template>
   <section>
     <HeaderBack title="Gerenciador de produtos">
-      <nav>
-        <Router link="/product/add" primary>
-          <span class="material-icons">add</span>
-          <span>Adeicionar</span>
-        </Router>
-        <form>
-          <input
-            type="search"
-            v-focus
-            placeholder="Buscar"
-            v-model="searchProxy"
-          />
-          <select v-model="limitProxy">
-            <option value="5">limite 5</option>
-            <option value="10">limite 10</option>
-            <option value="15">limite 15</option>
-          </select>
-        </form>
-      </nav>
+      <div class="container-nav-manage">
+        <NavManage @search="search" :badsearch="bad_search">
+          <template v-slot:button>
+            <Router link="/product/add" primary>
+              <span class="material-icons">add</span>
+              <span>Adicionar</span>
+            </Router>
+          </template>
+        </NavManage>
+      </div>
     </HeaderBack>
 
     <main>
@@ -30,20 +21,22 @@
           <thead>
             <tr>
               <th>código</th>
-              <th>nome</th>
-              <th>CPF/CNPJ</th>
-              <th>telefone</th>
-              <th>logradouro</th>
+              <th>Descrição</th>
+              <th>Fabricante</th>
+              <th>Categoria</th>
+              <th>Unidade</th>
+              <th>Preço</th>
               <th>controles</th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(row, index) in dataClient" :key="index">
-              <td>{{ row.id_client }}</td>
-              <td>{{ row.first_name }} {{ row.last_name }}</td>
-              <td>{{ row.cpf_cnpj }}</td>
-              <td>{{ row.phone }}</td>
-              <td>{{ row.address }}</td>
+            <tr v-for="(row, index) in dataProduct" :key="index">
+              <td>{{ row.id_product }}</td>
+              <td>{{ row.description }} {{ row.last_name }}</td>
+              <td>{{ row.manufacturer }}</td>
+              <td>{{ row.id_category }}</td>
+              <td>{{ row.id_unity }}</td>
+              <td>{{ row.price }}</td>
               <td>
                 <div class="controls">
                   <a @click.prevent="edit(row)">
@@ -58,7 +51,7 @@
           </tbody>
         </table>
       </div>
-      {{help}}
+      {{ help }}
     </main>
   </section>
 </template>
@@ -68,76 +61,46 @@
 <!-- JavaScript -->
 
 <script>
+import { mapMutations, mapGetters } from "vuex";
 
-import { mapMutations, mapGetters } from 'vuex';
+import api from "@/services/http";
 
-import api from '@/services/http';
-
-import HeaderBack from '@/components/headers/HeaderBack'
-import Router from '@/components/buttons/Router'
+import HeaderBack from "@/components/headers/HeaderBack";
+import NavManage from "@/components/navs/NavManage";
+import Router from "@/components/buttons/Router";
 
 export default {
   name: "ProductManage",
 
   data: () => ({
-    dataClient: [],
-    form: {
-      limit: 5,
-      search: "",
-    },
-    help: ''
+    dataProduct: [],
+    help: "",
   }),
 
   methods: {
     ...mapMutations(["TMP"]),
 
-    edit(da) {
-      console.log(da);
-      this.TMP(da);
-      this.$router.push("/client/update");
-    },
-
-    setData(value, limit) {
-      if (value) {
-        api.get(`/client/name/${value}/${limit}`).then(({ data }) => {
-          this.dataClient = data;
-        }).catch( err => {
-          console.log(err);
-        })
-      }
+    edit(data) {
+      this.TMP(data);
+      this.$router.push("/product/update");
     },
   },
 
   computed: {
     ...mapGetters(["tmp"]),
-    limitProxy: {
-      get() {
-        return this.form.limit;
-      },
-      set(val) {
-        this.form.limit = val;
-        this.setData(this.form.search, this.form.limit);
-      },
-    },
-    searchProxy: {
-      get() {
-        return this.form.search;
-      },
-      set(val) {
-        this.form.search = val;
-        this.setData(this.form.search, this.form.limit);
-      },
-    },
   },
 
   components: {
     HeaderBack,
-    Router
+    NavManage,
+    Router,
   },
 
   mounted() {
-    this.setData("a", this.form.limit);
-  },
+    api.get('/product/list').then( res => {
+      this.dataProduct = res.data
+    })
+  }
 };
 </script>
 
@@ -145,27 +108,8 @@ export default {
 <!-- CSS -->
 
 <style scoped>
-
-nav {
-  display: flex;
+.container-nav-manage {
   margin-top: 15px;
-}
-
-nav a {
-  width: 33.33333%;
-}
-
-nav form {
-  display: flex;
-  width: 100%;
-}
-
-nav form input {
-  margin: 0 15px;
-}
-
-nav form select {
-  width: 33.33333%;
 }
 
 section main {
@@ -191,11 +135,10 @@ table td {
 .controls a {
   display: block;
   cursor: pointer;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .controls a:hover {
   opacity: 0.5;
 }
-
 </style>

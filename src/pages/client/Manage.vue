@@ -2,28 +2,18 @@
 
 <template>
   <section>
-    <header-back title="Gerenciador de clientes">
-      <nav>
-        <Router link="/client/add" primary>
-          <span class="material-icons">add</span>
-          <span>Novo cliente</span>
-        </Router>
-        <form>
-          <input
-            type="search"
-            v-focus
-            placeholder="Buscar"
-            v-model="searchProxy"
-          />
-          <select v-model="limitProxy">
-            <option value="5">limite 5</option>
-            <option value="10">limite 10</option>
-            <option value="15">limite 15</option>
-          </select>
-        </form>
-      </nav>
-    </header-back>
-
+    <HeaderBack title="Gerenciador de clientes">
+      <div class="container-nav-manage">
+        <NavManage @search="search" :badsearch="bad_search">
+          <template v-slot:button>
+            <Router link="/client/add" primary>
+              <span class="material-icons">add</span>
+              <span>Novo cliente</span>
+            </Router>
+          </template>
+        </NavManage>
+      </div>
+    </HeaderBack>
     <main>
       <div class="table scrollable">
         <table>
@@ -58,7 +48,7 @@
           </tbody>
         </table>
       </div>
-      {{help}}
+      {{ help }}
     </main>
   </section>
 </template>
@@ -68,75 +58,57 @@
 <!-- JavaScript -->
 
 <script>
+import { mapMutations, mapGetters } from "vuex";
 
-import { mapMutations, mapGetters } from 'vuex';
+import api from "@/services/http";
+import error from "@/services/http/error";
 
-import api from '@/services/http';
-
-import HeaderBack from '@/components/headers/HeaderBack'
-import Router from '@/components/buttons/Router'
+import HeaderBack from "@/components/headers/HeaderBack";
+import NavManage from "@/components/navs/NavManage";
+import Router from "@/components/buttons/Router";
 
 export default {
   name: "ClientManage",
 
   data: () => ({
+    bad_search: false,
     dataClient: [],
-    form: {
-      limit: 5,
-      search: "",
-    },
-    help: ''
+    help: "",
   }),
 
   methods: {
     ...mapMutations(["TMP"]),
 
-    edit(da) {
-      console.log(da);
-      this.TMP(da);
-      this.$router.push("/client/update");
+    search(form) {
+      if (form.search) {
+        api
+          .get(`/client/name/${form.search}/${form.limit}`)
+          .then((res) => {
+            this.dataClient = res.data;
+            this.bad_search = false;
+          })
+          .catch((err) => {
+            error.check(err.response, (isShow) => {
+              if (isShow) this.bad_search = true;
+            });
+          });
+      }
     },
 
-    setData(value, limit) {
-      if (value) {
-        api.get(`/client/name/${value}/${limit}`).then(({ data }) => {
-          this.dataClient = data;
-        }).catch( err => {
-          console.log(err);
-        })
-      }
+    edit(data) {
+      this.TMP(data);
+      this.$router.push("/client/update");
     },
   },
 
   computed: {
     ...mapGetters(["tmp"]),
-    limitProxy: {
-      get() {
-        return this.form.limit;
-      },
-      set(val) {
-        this.form.limit = val;
-        this.setData(this.form.search, this.form.limit);
-      },
-    },
-    searchProxy: {
-      get() {
-        return this.form.search;
-      },
-      set(val) {
-        this.form.search = val;
-        this.setData(this.form.search, this.form.limit);
-      },
-    },
   },
 
   components: {
     HeaderBack,
-    Router
-  },
-
-  mounted() {
-    this.setData("a", this.form.limit);
+    NavManage,
+    Router,
   },
 };
 </script>
@@ -145,27 +117,8 @@ export default {
 <!-- CSS -->
 
 <style scoped>
-
-nav {
-  display: flex;
+.container-nav-manage{
   margin-top: 15px;
-}
-
-nav a {
-  width: 33.33333%;
-}
-
-nav form {
-  display: flex;
-  width: 100%;
-}
-
-nav form input {
-  margin: 0 15px;
-}
-
-nav form select {
-  width: 33.33333%;
 }
 
 section main {
@@ -191,11 +144,10 @@ table td {
 .controls a {
   display: block;
   cursor: pointer;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 }
 
 .controls a:hover {
   opacity: 0.5;
 }
-
 </style>

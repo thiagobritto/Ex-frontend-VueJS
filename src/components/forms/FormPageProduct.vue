@@ -1,70 +1,82 @@
 <template>
-  <form @submit.prevent="send">
-    <div>
-      <input
-        type="text"
-        v-model="form.code"
-        placeholder="Código"
-        class="code"
-        disabled
-      />
-      <input
-        type="text"
-        v-model="form.description"
-        placeholder="Descrição"
-        v-focus
-        required
-      />
-    </div>
-    <div>
-      <input type="text" v-model="form.provide" placeholder="Fornecedor" />
-      <input type="text" v-model="form.manufacturer" placeholder="Fabricante" />
-    </div>
-    <div>
-      <input
-        type="text"
-        v-model="form.ncm"
-        v-mask="'########'"
-        placeholder="NCM"
-      />
-      <select v-model="form.category">
-        <option value="sem categoria">sem categoria</option>
-        <option value="limpeza">limpeza</option>
-        <option value="higiene">higiene</option>
-      </select>
-    </div>
-    <div>
-      <select v-model="form.unity">
-        <option selected value="und">und</option>
-        <option value="kg">kg</option>
-        <option value="litro">litro</option>
-      </select>
-    </div>
-    <div>
-      <div class="money">
-        <span>R$</span>
+  <div>
+    <form @submit.prevent="send">
+      <div>
         <input
           type="text"
-          v-model="priceProxy"
-          v-money="'000.000.000,00'"
-          placeholder="Preço"
-          maxlength="14"
-          ref="price"
+          placeholder="Código"
+          class="code"
+          :value="form.id_product"
+          disabled
+        />
+        <input
+          type="text"
+          v-model="form.description"
+          placeholder="Descrição"
+          v-focus
           required
         />
       </div>
-      <input
-        type="text"
-        v-model="stockProxy"
-        placeholder="Estoque"
-        maxlength="12"
-        v-volume="'00000000.000'"
-      />
-    </div>
-    <div>
-      <ButtonSubmit :title="labelbutton" />
-    </div>
-  </form>
+      <div>
+        <input type="text" v-model="form.provide" placeholder="Fornecedor" />
+        <input
+          type="text"
+          v-model="form.manufacturer"
+          placeholder="Fabricante"
+        />
+      </div>
+      <div>
+        <input
+          type="text"
+          v-model="form.ncm"
+          v-mask="'########'"
+          placeholder="NCM"
+        />
+        <select v-model="form.id_category">
+          <option v-for="(d, i) in category" :key="i" :value="d.id_category">
+            {{ d.name }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <select v-model="form.id_unity">
+          <option v-for="(d, i) in unity" :key="i" :value="d.id_unity">
+            {{ d.name }}
+          </option>
+        </select>
+      </div>
+      <div>
+        <div class="money">
+          <span>R$</span>
+          <input
+            type="text"
+            v-model="priceProxy"
+            v-money="'000.000.000,00'"
+            placeholder="Preço"
+            maxlength="14"
+            ref="price"
+            required
+          />
+        </div>
+        <input
+          type="text"
+          v-model="stockProxy"
+          placeholder="Estoque"
+          maxlength="12"
+          v-volume="'00000000.000'"
+        />
+      </div>
+      <div>
+        <ButtonSubmit :title="labelbutton" />
+      </div>
+    </form>
+    <component
+      :is="help.component"
+      :title="help.title"
+      :message="help.message"
+      @close="closePopup"
+    />
+  </div>
 </template>
 
 
@@ -73,7 +85,11 @@
 
 <script>
 import { mask } from "vue-the-mask";
+
+import api from "@/services/http";
+import error from "@/services/http/error";
 import MaskNumber from "@/services/common/MaskNumber";
+
 import ButtonSubmit from "@/components/buttons/ButtonSubmit";
 
 export default {
@@ -86,19 +102,29 @@ export default {
       provider: "",
       description: "",
       ncm: "",
-      category: "sem categoria",
-      unity: "und",
-      price: "0.00",
+      id_category: 1,
+      id_unity: 1,
+      price: "",
       stock: "",
     },
-    help: "",
+    category: [],
+    unity: [],
+    help: {
+      component: false,
+      title: "",
+      message: "",
+    },
   }),
 
   props: {
+    fillable: {
+      type: Object,
+      default: new Object(),
+    },
     labelbutton: {
       type: String,
-      default: 'Button'
-    }
+      default: "Button",
+    },
   },
 
   directives: {
@@ -147,12 +173,48 @@ export default {
   },
 
   methods: {
-    send(){
-      this.$emit('submitform', this.form)
-    }
+    send() {
+      this.$emit("submitform", this.form);
+    },
+
+    closePopup() {
+      this.help.component = false;
+    },
+  },
+
+  mounted() {
+    api
+      .get("/category/all")
+      .then((res) => {
+        this.category = res.data;
+        if (!this.form.category)
+          this.form.category = res.data[0]["id_category"];
+      })
+      .catch(({ response }) => {
+        error.check(response, (isFatal, title, message) => {
+          if (isFatal) {
+            this.help.component = "alert";
+            this.help.title = title;
+            this.help.message = message;
+          }
+        });
+      });
+
+    api
+      .get("/unity/all")
+      .then((res) => {
+        this.unity = res.data;
+        if (!this.form.unity) this.form.unity = res.data[0]["id_unity"];
+      })
+      .catch((err) => {
+        error.check(err.response, (isFatal, title, message) => {
+          if (isFatal) this.openAlert(title, message);
+        });
+      });
+
+    if (this.fillable.id_product) this.form = this.fillable;
   },
 };
-
 </script>
 
 
@@ -179,7 +241,7 @@ form select {
   width: 33.3333%;
 }
 
-.money{
+.money {
   margin-bottom: 0;
 }
 </style>

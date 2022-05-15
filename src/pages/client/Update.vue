@@ -24,6 +24,7 @@
 <script>
 
 import { mapGetters } from 'vuex'
+
 import FormPageClient from '@/components/forms/FormPageClient.vue'
 import HeaderBack from '@/components/headers/HeaderBack'
 
@@ -51,8 +52,8 @@ export default {
   },
 
   created(){
-    if(this.tmp.id_client)
-      this.fill = this.tmp
+    if(this.tmp.update)
+      this.fill = this.tmp.data
   }
 };
 

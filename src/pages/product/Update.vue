@@ -2,12 +2,16 @@
 
 <template>
   <section>
-    <HeaderBack title="Cadastro de produtos" />
+    <HeaderBack title="Atualizar produto" />
     <main>
       <div>
-        <FormPageProduct labelbutton="Registrar" @submitform="submit" />
+        <FormPageProduct
+          :fillable="fill"
+          labelbutton="Registrar"
+          @submitform="submit"
+        />
       </div>
-      <div>help</div>
+      <div></div>
     </main>
   </section>
 </template>
@@ -17,11 +21,17 @@
 <!--JavaScript-->
 
 <script>
+import { mapGetters } from "vuex";
+
 import HeaderBack from "@/components/headers/HeaderBack";
 import FormPageProduct from "@/components/forms/FormPageProduct";
 
 export default {
-  name: "ProductAdd",
+  name: "ProductUpdate",
+
+  data: () => ({
+    fill: {},
+  }),
 
   components: {
     HeaderBack,
@@ -32,6 +42,14 @@ export default {
     submit(form) {
       console.log(form);
     },
+  },
+
+  computed: {
+    ...mapGetters(["tmp"]),
+  },
+
+  created() {
+    if (this.tmp.update) this.fill = this.tmp.data;
   },
 };
 </script>

@@ -4,7 +4,7 @@
   <section>
     <HeaderBack title="Gerenciador de clientes">
       <div class="container-nav-manage">
-        <NavManage @search="search" :badsearch="bad_search">
+        <NavManage @search="search" :badsearch="badSearch">
           <template v-slot:button>
             <Router link="/client/add" primary>
               <span class="material-icons">add</span>
@@ -48,7 +48,12 @@
           </tbody>
         </table>
       </div>
-      {{ help }}
+      <component
+        :is="help.component"
+        :title="help.title"
+        :message="help.message"
+        @click="closePopup"
+      />
     </main>
   </section>
 </template>
@@ -71,32 +76,49 @@ export default {
   name: "ClientManage",
 
   data: () => ({
-    bad_search: false,
+    badSearch: false,
     dataClient: [],
-    help: "",
+    help: {
+      component: false,
+      title: "",
+      message: "",
+    },
   }),
 
   methods: {
     ...mapMutations(["TMP"]),
 
+    closePopup() {
+      this.help.component = false;
+    },
+
     search(form) {
       if (form.search) {
         api
-          .get(`/client/name/${form.search}/${form.limit}`)
+          .get(`/client/search/${form.search}/${form.limit}`)
           .then((res) => {
             this.dataClient = res.data;
-            this.bad_search = false;
+            this.badSearch = false;
           })
           .catch((err) => {
-            error.check(err.response, (isShow) => {
-              if (isShow) this.bad_search = true;
+            error.check(err.response, (isFatal, title, message) => {
+              if (isFatal) {
+                this.help.component = 'alert'
+                this.help.title = title 
+                this.help.message = message
+              } else {
+                this.badSearch = true;
+              }
             });
           });
       }
     },
 
     edit(data) {
-      this.TMP(data);
+      this.TMP({
+        update: true,
+        data,
+      });
       this.$router.push("/client/update");
     },
   },
@@ -110,6 +132,13 @@ export default {
     NavManage,
     Router,
   },
+
+  mounted() {
+    this.search({
+      search: "a",
+      limit: "5",
+    });
+  },
 };
 </script>
 
@@ -117,7 +146,7 @@ export default {
 <!-- CSS -->
 
 <style scoped>
-.container-nav-manage{
+.container-nav-manage {
   margin-top: 15px;
 }
 

@@ -4,7 +4,7 @@
   <section>
     <HeaderBack title="Gerenciador de produtos">
       <div class="container-nav-manage">
-        <NavManage @search="search" :badsearch="bad_search">
+        <NavManage @search="search" :badsearch="badSearch">
           <template v-slot:button>
             <Router link="/product/add" primary>
               <span class="material-icons">add</span>
@@ -34,8 +34,8 @@
               <td>{{ row.id_product }}</td>
               <td>{{ row.description }} {{ row.last_name }}</td>
               <td>{{ row.manufacturer }}</td>
-              <td>{{ row.id_category }}</td>
-              <td>{{ row.id_unity }}</td>
+              <td>{{ row.category }}</td>
+              <td>{{ row.unity }}</td>
               <td>{{ row.price }}</td>
               <td>
                 <div class="controls">
@@ -51,7 +51,12 @@
           </tbody>
         </table>
       </div>
-      {{ help }}
+      <component
+        :is="help.component"
+        :title="help.title"
+        :message="help.message"
+        @close="closePopup"
+      />
     </main>
   </section>
 </template>
@@ -64,6 +69,7 @@
 import { mapMutations, mapGetters } from "vuex";
 
 import api from "@/services/http";
+import error from "@/services/http/error";
 
 import HeaderBack from "@/components/headers/HeaderBack";
 import NavManage from "@/components/navs/NavManage";
@@ -74,15 +80,49 @@ export default {
 
   data: () => ({
     dataProduct: [],
-    help: "",
+    badSearch: false,
+    help: {
+      component: false,
+      title: "",
+      message: "",
+    },
   }),
 
   methods: {
     ...mapMutations(["TMP"]),
 
     edit(data) {
-      this.TMP(data);
+        this.TMP({
+        update: true,
+        data,
+      });
       this.$router.push("/product/update");
+    },
+
+    closePopup() {
+      this.help.component = false;
+    },
+
+    search(form) {
+      if (form.search) {
+        api
+          .get(`/product/search/${form.search}/${form.limit}`)
+          .then((res) => {
+            this.dataProduct = res.data;
+            this.badSearch = false;
+          })
+          .catch((err) => {
+            error.check(err.response, (isFatal, title, message) => {
+              if (isFatal) {
+                this.help.component = "alert";
+                this.help.title = title;
+                this.help.message = message;
+              } else {
+                this.badSearch = true;
+              }
+            });
+          });
+      }
     },
   },
 
@@ -97,10 +137,11 @@ export default {
   },
 
   mounted() {
-    api.get('/product/list').then( res => {
-      this.dataProduct = res.data
-    })
-  }
+    this.search({
+      search: "a",
+      limit: "5",
+    });
+  },
 };
 </script>
 

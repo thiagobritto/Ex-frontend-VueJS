@@ -59,11 +59,7 @@ export default {
         this.$emit("search", this.form);
       },
     },
-  },
-
-  mounted() {
-    this.$emit("search", this.form);
-  },
+  }
 };
 </script>
 

@@ -14,6 +14,12 @@ const routes = [
     name: 'ProductManage',
     component: lazyLoad('product/Manage'),
     meta: { layout: 'default' }
+  },
+  {
+    path: '/product/update',
+    name: 'ProductUpdate',
+    component: lazyLoad('product/Update'),
+    meta: { layout: 'default' }
   }
 ]
 

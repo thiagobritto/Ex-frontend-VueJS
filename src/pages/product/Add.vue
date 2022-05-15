@@ -7,7 +7,7 @@
       <div>
         <FormPageProduct labelbutton="Registrar" @submitform="submit" />
       </div>
-      <div>help</div>
+      <div></div>
     </main>
   </section>
 </template>

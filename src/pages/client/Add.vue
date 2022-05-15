@@ -2,15 +2,13 @@
 
 <template>
   <section>
-    <HeaderBack title="Cadastro de cliente"/>
+    <HeaderBack title="Cadastro de cliente" />
     <main>
-      <FormPageClient 
-        @submitform="submit" 
-        labelbutton="Resgistrar"/>
+      <FormPageClient @submitform="submit" labelbutton="Resgistrar" />
       <div class="help">
         {{ help }}
       </div>
-    </main>  
+    </main>
   </section>
 </template>
 
@@ -19,29 +17,27 @@
 <!-- JavaScript -->
 
 <script>
-
-import FormPageClient  from '@/components/forms/FormPageClient.vue'
-import HeaderBack  from '@/components/headers/HeaderBack'
+import FormPageClient from "@/components/forms/FormPageClient.vue";
+import HeaderBack from "@/components/headers/HeaderBack";
 
 export default {
   name: "ClientAdd",
 
   data: () => ({
-    help: ''
+    help: "",
   }),
-  
+
   methods: {
-    submit(form){
-      this.teste = form
-    }
+    submit(form) {
+      this.teste = form;
+    },
   },
-  
+
   components: {
     FormPageClient,
-    HeaderBack
-  }
+    HeaderBack,
+  },
 };
-
 </script>
 
 
@@ -49,7 +45,6 @@ export default {
 <!-- CSS -->
 
 <style scoped>
-
 section main {
   display: flex;
   flex-wrap: wrap;
@@ -57,13 +52,11 @@ section main {
 }
 
 section main div,
-section main form
-{
+section main form {
   flex: 1;
 }
 
 .help {
   padding: 0 5px;
 }
-
 </style>

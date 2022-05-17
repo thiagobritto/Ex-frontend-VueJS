@@ -19,6 +19,9 @@
         <h3>Funcionario do mês</h3>
       </div>
     </div>
+    <button @click="teste">
+      ok
+    </button>
   </section>
 </template>
 
@@ -30,6 +33,11 @@
 export default {
   name: "Home",
   components: {},
+  methods:{
+    teste(){
+      window.ss()
+    }
+  }
 };
 </script>
 

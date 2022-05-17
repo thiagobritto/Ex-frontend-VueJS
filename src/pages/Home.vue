@@ -30,12 +30,17 @@
 <!--JavaScript-->
 
 <script>
+
 export default {
   name: "Home",
   components: {},
   methods:{
     teste(){
-      window.ss()
+      window.ipcRenderer.invoke('invoketeste', {
+        ol: 'ok'
+      }).then( res => {
+        console.log(res);
+      })
     }
   }
 };

@@ -7,6 +7,10 @@
     font-family: 'Roboto', sans-serif;
 }
 
+body{
+    background: #fff;
+}
+
 :root {
     /* Color table */
     --color--1: #22242a;

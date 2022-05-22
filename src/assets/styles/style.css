@@ -1,16 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;900&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-}
-
-body{
-    background: #fff;
-}
-
 :root {
     /* Color table */
     --color--1: #22242a;
@@ -18,148 +7,32 @@ body{
     --color--3: #19b3d3;
     --color--4: #0d9dbb;
     --color--5: #1dc4e7;
-
-    /* Layout default settings */
-    --width--aside: 200px;
-    --heigth--nav: 60px;
-    --heigth--footer: 20px;
-
-    --bk--nav: var(--color--1);
-    --bk--aside: var(--color--2);
-    --bk--footer: var(--color--1);
-    --bk--link--hover: var(--color--3);
-    --color--logo: var(--color--5);
-
-    /* Home */
-    --box--shadow--card: var(--color--2);
-    --color--card: var(--color--1);
 }
 
-/* commom */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    color: var(--color--2);
+}
 
-select,
-input[type=tel],
-input[type=text],
-input[type=email],
-input[type=search],
-input[type=password] {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid var(--color--2);
-    outline: none;
+body{
     background: #fff;
-    width: 100%;
 }
 
-select { 
-    cursor: pointer;
-    user-select: none;
-    text-decoration: none;
+.scrollbar-dark::-webkit-scrollbar{
+    width: 8px;
+    height: 8px;
+    background: transparent;
 }
 
-select:focus,
-input[type=tel]:focus,
-input[type=text]:focus,
-input[type=email]:focus,
-input[type=search]:focus,
-input[type=password]:focus {
-    outline: var(--color--3) solid 1px;
+.scrollbar-dark::-webkit-scrollbar-thumb{
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, .3);
 }
 
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-}
-
-table td,
-table th {
-    white-space: nowrap;
-}
-
-/* review */
-
-.money {
-    position: relative;
-}
-
-.money span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 8px;
-    width: 35px;
-}
-
-.money input {
-    padding-left: 35px;
-}
-
-.scrollbar-hide {
-    scrollbar-width: none;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-
-.scrollable {
-    padding-bottom: 15px;
-    overflow: scroll;
-    scrollbar-color: var(--color--2) #fff;
-    scrollbar-width: auto;
-}
-
-.scrollable-y{
-    overflow-y: scroll;
-    scrollbar-color: var(--color--2) #fff;
-    scrollbar-width: auto;
-}
-
-.scrollable::-webkit-scrollbar, 
-.scrollable-y::-webkit-scrollbar{
-    width: 6px;
-    height: 6px;
-    background: #FFFFFF;
-}
-
-.scrollable::-webkit-scrollbar-thumb,
-.scrollable-y::-webkit-scrollbar-thumb {
-    width: 6px;
-    height: 6px;
-    border-radius: 3px;
-    background: var(--color--2);
-}
-
-.scrollable-dark {
-    padding-bottom: 15px;
-    overflow: scroll;
-    scrollbar-color: #fff var(--color--2);
-    scrollbar-width: auto;
-}
-
-.scrollable-y-dark{
-    overflow-y: scroll;
-    scrollbar-color: #fff var(--color--2);
-    scrollbar-width: auto;
-}
-
-.scrollable-dark::-webkit-scrollbar, 
-.scrollable-y-dark::-webkit-scrollbar{
-    width: 7px;
-    height: 7px;
-    background: var(--color--2);
-}
-
-.scrollable-dark::-webkit-scrollbar-thumb,
-.scrollable-y-dark::-webkit-scrollbar-thumb {
-    width: 7px;
-    height: 7px;
-    border-radius: 3px;
-    background: #FFFFFF;
-    border: 1px solid var(--color--2);
-    cursor: pointer;
+.scrollbar-dark::-webkit-scrollbar-thumb:hover{
+    background: rgba(255, 255, 255, .5);
 }

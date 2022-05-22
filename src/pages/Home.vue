@@ -19,9 +19,6 @@
         <h3>Funcionario do mês</h3>
       </div>
     </div>
-    <button @click="teste">
-      ok
-    </button>
   </section>
 </template>
 
@@ -33,6 +30,12 @@
 
 export default {
   name: "Home",
+  props:{
+    tes: {
+      type: String,
+      default: ''
+    }
+  },
   components: {},
   methods:{
     teste(){
@@ -51,29 +54,5 @@ export default {
 <!--CSS-->
 
 <style scoped>
-.statistics {
-  display: flex;
-  height: 120px;
-  padding: 10px;
-}
 
-.statistics div {
-  flex: 1;
-  height: 100%;
-  margin: 10px;
-  border: 10px solid transparent;
-  border-radius: 5px;
-  box-shadow: 0 0 12px -6px var(--box--shadow--card);
-  overflow: hidden;
-  color: var(--color--card);
-}
-.message {
-  background: lightcoral;
-}
-.ranking {
-  background: lightblue;
-}
-.chapion {
-  background: lightgreen;
-}
 </style>

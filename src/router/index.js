@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../pages/Home.vue'
 
-import client from './client'
-import product from './product'
+// import client from './client'
+// import product from './product'
 
 const lazyLoad = (view) => {
     return () => import(`@/pages/${view}.vue`)
@@ -21,8 +21,6 @@ const routes = [
         component: lazyLoad('PageNotFound'),
         meta: { layout: 'empty' }
     },
-    ...client,
-    ...product,
     {
         path: '/login',
         name: 'Login',

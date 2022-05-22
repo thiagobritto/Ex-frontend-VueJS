@@ -9,14 +9,12 @@ import './assets/styles/style.css'
 import DefaultLayout from '@/components/layouts/DefaultLayout.vue'
 import EmptyLayout from '@/components/layouts/EmptyLayout.vue'
 import NavbarLayout from '@/components/layouts/NavbarLayout.vue'
-import Alert from '@/components/popups/Alert.vue'
 
 const app = createApp(App)
 
 app.component('default-layout', DefaultLayout)
 app.component('empty-layout', EmptyLayout)
 app.component('navbar-layout', NavbarLayout)
-app.component('alert', Alert)
 
 app.directive('focus', {
     mounted: (el) => el.focus()

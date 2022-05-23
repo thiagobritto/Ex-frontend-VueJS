@@ -32,6 +32,12 @@ const routes = [
         name: 'SalePDV',
         component: lazyLoad('sale/PDV'),
         meta: { layout: 'empty' }
+    },
+    {
+        path: '/register/client',
+        name: 'RegisterClient',
+        component: lazyLoad('RegisterClient'),
+        meta: { layout: 'default' }
     }
 ]
 

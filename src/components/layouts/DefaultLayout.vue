@@ -4,11 +4,11 @@
   <section class="dashboard">
     <aside :class="[{ 'close-menu': inpMenuFull }, { 'open-menu': inpMenu }]">
       <header class="header-menu">
-        <router-link to="/" class="logo">THOMC /////</router-link>
+        <h1 @click="locationTo('/')" class="logo">THOMC /////</h1>
       </header>
-      <div class="list-menu">
-        <MenuBar />
-      </div>
+      <nav class="list-menu scrollbar-dark">
+        <MenuBar @lacation="locationTo" />
+      </nav>
     </aside>
     <div
       @click="toggleMenu"
@@ -16,20 +16,28 @@
     ></div>
     <section>
       <header class="header-page">
-        <i @click="toggleMenu" class="material-icons btn-menu">menu</i>
-        <i @click="toggleMenuFull" class="material-icons btn-menu btn-menu-full">menu</i>
-        <h4>Madeireira Santo Antônio</h4>
+        <div>
+          <i @click="toggleMenu" class="material-icons btn-menu"> menu </i>
+          <i
+            @click="toggleMenuFull"
+            class="material-icons btn-menu btn-menu-full">
+            menu
+          </i>
+        </div>
+        <h4>Thomc info - LTDA</h4>
         <div class="user">
           <h6>Lene</h6>
           <figure>
-            <img src="@/assets/images/user.jpg" alt="">
+            <img src="@/assets/images/user.jpg" alt="" />
           </figure>
         </div>
       </header>
-      <slot></slot>
+      <main class="page scrollbar-light">
+        <slot></slot>
+      </main>
     </section>
     <footer>
-      <h6>footer</h6>
+      <h6>{{date}}</h6>
     </footer>
   </section>
 </template>
@@ -49,12 +57,27 @@ export default {
   components: {
     MenuBar,
   },
+  computed: {
+    date() {
+      let now = new Date();
+      return now.toLocaleDateString("pt-BR", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    },
+  },
   methods: {
     toggleMenu() {
       this.inpMenu = !this.inpMenu;
     },
     toggleMenuFull() {
       this.inpMenuFull = !this.inpMenuFull;
+    },
+    locationTo(link) {
+      this.toggleMenu();
+      this.$router.push(link);
     },
   },
 };
@@ -81,17 +104,23 @@ export default {
 .header-menu {
   height: 40px;
   background: var(--color--1);
+  user-select: none;
 }
 
 .header-menu .logo {
-  display: block;
-  text-decoration: none;
-  color: var(--color--5);
   padding: 10px;
+  color: var(--color--5);
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .list-menu {
   height: calc(100% - 40px);
+  user-select: none;
+  overflow-y: auto;
 }
 
 .dashboard div.overlay {
@@ -113,18 +142,21 @@ export default {
 .dashboard section {
   height: calc(100vh - 20px);
   background: #fff;
-  padding: 10px;
-  overflow-y: auto;
 }
 
 .header-page {
   height: 40px;
   box-shadow: 0 0 10px -5px var(--color--1);
-  margin: -10px;
-  margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  user-select: none;
+}
+
+.page {
+  height: calc(100% - 40px);
+  padding: 10px;
+  overflow-y: auto;
 }
 
 .btn-menu {
@@ -136,13 +168,13 @@ export default {
   display: none;
 }
 
-.user{
+.user {
   padding: 0 10px;
   display: flex;
   align-items: center;
 }
 
-.user figure{
+.user figure {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -153,7 +185,7 @@ export default {
   margin-left: 10px;
 }
 
-.user figure img{
+.user figure img {
   height: 100%;
 }
 
@@ -163,6 +195,7 @@ export default {
   height: 20px;
   background: var(--color--1);
   padding: 0 10px;
+  user-select: none;
 }
 
 .dashboard footer > * {
@@ -173,10 +206,12 @@ export default {
   .overlay {
     display: none;
   }
+
   .dashboard {
     display: flex;
     flex-wrap: wrap;
   }
+
   .dashboard aside {
     transform: translateX(0);
     position: static;
@@ -195,10 +230,10 @@ export default {
     width: 0px !important;
     overflow: hidden;
   }
-  .btn-menu{
+  .btn-menu {
     display: none;
   }
-  .btn-menu-full{
+  .btn-menu-full {
     display: initial;
   }
 }

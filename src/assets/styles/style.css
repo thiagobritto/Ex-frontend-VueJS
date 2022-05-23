@@ -17,22 +17,46 @@
     color: var(--color--2);
 }
 
-body{
+body {
     background: #fff;
 }
 
-.scrollbar-dark::-webkit-scrollbar{
+i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.scrollbar-dark::-webkit-scrollbar {
     width: 8px;
     height: 8px;
     background: transparent;
 }
 
-.scrollbar-dark::-webkit-scrollbar-thumb{
+.scrollbar-dark::-webkit-scrollbar-thumb {
     width: 100px;
     height: 100px;
     background: rgba(255, 255, 255, .3);
 }
 
-.scrollbar-dark::-webkit-scrollbar-thumb:hover{
+.scrollbar-dark::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, .5);
+}
+
+/* light */
+
+.scrollbar-light::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: transparent;
+}
+
+.scrollbar-light::-webkit-scrollbar-thumb {
+    width: 100px;
+    height: 100px;
+    background: rgba(0, 0, 0, .3);
+}
+
+.scrollbar-light::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, .5);
 }

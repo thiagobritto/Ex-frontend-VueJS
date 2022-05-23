@@ -3,7 +3,7 @@
 <template>
   <section class="home">
     <div class="statistics">
-      <div class="message">
+      <div v-for="x in 20" :key="x" class="message">
         <h3>Aviso!</h3>
         <p>
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cumque

@@ -1,22 +1,22 @@
 <template>
   <ul>
-    <li @click="to('/register/client')"> 
+    <li @click="to('/')"> 
       <i class="material-icons">local_offer</i>
       Vender
     </li>
-    <li @click="to('/register/client')"> 
+    <li @click="to('/search/client')"> 
       <i class="material-icons">person</i>
       Cliente
     </li>
-    <li @click="to('/register/client')"> 
+    <li @click="to('/')"> 
       <i class="material-icons">local_grocery_store</i>
       Produto
     </li>
-    <li @click="to('/register/client')"> 
+    <li @click="to('/')"> 
       <i class="material-icons">account_circle</i>
       Usuário
     </li>
-    <li @click="to('/register/client')"> 
+    <li @click="to('/')"> 
       <i class="material-icons">logout</i>
       Sair
     </li>
@@ -28,7 +28,7 @@ export default {
   name: "MenuBar",
   methods: {
     to(link) {
-      this.$emit("lacation", link);
+      this.$emit("location", link);
     },
   },
 };
@@ -37,6 +37,7 @@ export default {
 <style scoped>
 ul {
   list-style: none;
+  overflow-x: hidden;
 }
 
 ul li {
@@ -45,6 +46,7 @@ ul li {
   align-items: center;
   transition: background 0.3s;
   padding: 5px 10px;
+  white-space: nowrap;
 }
 
 ul li i {

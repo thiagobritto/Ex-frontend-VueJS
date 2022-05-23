@@ -2,43 +2,40 @@
 
 <template>
   <section class="dashboard">
-    <aside :class="[{ 'close-menu': inpMenuFull }, { 'open-menu': inpMenu }]">
-      <header class="header-menu">
-        <h1 @click="locationTo('/')" class="logo">THOMC /////</h1>
-      </header>
-      <nav class="list-menu scrollbar-dark">
-        <MenuBar @lacation="locationTo" />
-      </nav>
-    </aside>
-    <div
-      @click="toggleMenu"
-      :class="['overlay', { 'open-menu': inpMenu }]"
-    ></div>
-    <section>
-      <header class="header-page">
-        <div>
-          <i @click="toggleMenu" class="material-icons btn-menu"> menu </i>
-          <i
-            @click="toggleMenuFull"
-            class="material-icons btn-menu btn-menu-full">
-            menu
-          </i>
-        </div>
-        <h4>Thomc info - LTDA</h4>
-        <div class="user">
-          <h6>Lene</h6>
-          <figure>
-            <img src="@/assets/images/user.jpg" alt="" />
-          </figure>
-        </div>
-      </header>
-      <main class="page scrollbar-light">
-        <slot></slot>
-      </main>
+    <section class="dashboard-section">
+      <aside :class="asideClass">
+        <header>
+          <h1 @click="locationTo('/')">THOMC /////</h1>
+        </header>
+        <nav class="scrollbar-dark">
+          <MenuBar @location="locationTo" />
+        </nav>
+      </aside>
+      <section class="section-main">
+        <header>
+          <div class="left">
+            <i @click="toggleMenuMobile" class="material-icons btn-mobile"
+              >menu</i
+            >
+            <i @click="toggleMenuWeb" class="material-icons btn-web">menu</i>
+            <h4>Thomc info LTDA</h4>
+          </div>
+          <div class="right">
+            <h6>Lene</h6>
+            <figure>
+              <img src="@/assets/images/user.jpg" alt="">
+            </figure>
+          </div>
+        </header>
+        <section class="scrollbar-light">
+          <slot></slot>
+        </section>
+      </section>
     </section>
-    <footer>
-      <h6>{{date}}</h6>
+    <footer class="dashboard-footer">
+      <h6>{{ date }}</h6>
     </footer>
+    <div @click="toggleMenuMobile" :class="overlayClass"></div>
   </section>
 </template>
 
@@ -51,8 +48,19 @@ import MenuBar from "@/components/MenuBar";
 export default {
   name: "DefaultLayout",
   data: () => ({
-    inpMenu: false,
-    inpMenuFull: false,
+    asideClass: [
+      "aside-menu",
+      {
+        "open-menu": false,
+        "close-menu-web": false,
+      },
+    ],
+    overlayClass: [
+      "overlay",
+      {
+        "open-menu": false,
+      },
+    ],
   }),
   components: {
     MenuBar,
@@ -69,14 +77,16 @@ export default {
     },
   },
   methods: {
-    toggleMenu() {
-      this.inpMenu = !this.inpMenu;
+    toggleMenuMobile() {
+      this.asideClass[1]["open-menu"] = !this.asideClass[1]["open-menu"];
+      this.overlayClass[1]["open-menu"] = !this.overlayClass[1]["open-menu"];
     },
-    toggleMenuFull() {
-      this.inpMenuFull = !this.inpMenuFull;
+    toggleMenuWeb() {
+      this.asideClass[1]["close-menu-web"] =
+        !this.asideClass[1]["close-menu-web"];
     },
     locationTo(link) {
-      this.toggleMenu();
+      this.toggleMenuMobile();
       this.$router.push(link);
     },
   },
@@ -88,153 +98,157 @@ export default {
 <!-- CSS -->
 
 <style scoped>
-.dashboard {
-  height: 100vh;
+.dashboard-section {
+  height: calc(100vh - 20px);
+  width: 100%;
 }
 
-.dashboard aside {
+.dashboard-footer {
+  height: 20px;
+  width: 100%;
+  background: var(--color--1);
+  user-select: none;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.dashboard-footer > * {
+  color: #fff;
+}
+
+.aside-menu {
   position: fixed;
   height: 100vh;
   width: 200px;
   background: var(--color--2);
   transform: translateX(-100%);
   transition: transform 0.3s, width 0.3s;
+  user-select: none;
+  overflow-x: hidden;
 }
 
-.header-menu {
+.aside-menu header {
   height: 40px;
-  background: var(--color--1);
-  user-select: none;
-}
-
-.header-menu .logo {
+  width: 100%;
+  box-shadow: 0 0 10px -5px #000;
+  display: flex;
+  align-items: center;
   padding: 10px;
-  color: var(--color--5);
-  font-size: 16px;
-  font-weight: 400;
-  cursor: pointer;
-  white-space: nowrap;
-  overflow: hidden;
+  background: var(--color--1);
 }
 
-.list-menu {
+.aside-menu h1 {
+  color: var(--color--5);
+  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.aside-menu nav {
   height: calc(100% - 40px);
-  user-select: none;
+  width: 100%;
   overflow-y: auto;
 }
 
-.dashboard div.overlay {
+.section-main {
+  height: 100%;
+  width: 100%;
+  background: #f5f5f5;
+}
+
+.section-main header {
+  height: 40px;
+  width: 100%;
+  box-shadow: 0 0 10px -5px #000;
+  user-select: none;
+  background: #fff;
+}
+
+.section-main header,
+.section-main header .left,
+.section-main header .right {
+  display: flex;
+  align-items: center;
+}
+
+.section-main header .left,
+.section-main header .right {
+  padding: 10px;
+}
+
+.section-main header .left .btn-web {
+  display: none;
+}
+
+.section-main header .right {
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.section-main header .right figure{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.section-main header .right figure img{
+  height: 100%;
+}
+
+.section-main header .left i {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.section-main section {
+  height: calc(100% - 40px);
+  width: 100%;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.overlay {
   position: fixed;
-  right: 0;
   top: 0;
+  right: 0;
   height: 100vh;
   width: calc(100% - 200px);
-  background: black;
-  opacity: 0.3;
+  background: rgba(0, 0, 0, 0.5);
   transform: translateX(100%);
   transition: transform 0.3s;
 }
 
 .open-menu {
-  transform: translateX(0) !important;
-}
-
-.dashboard section {
-  height: calc(100vh - 20px);
-  background: #fff;
-}
-
-.header-page {
-  height: 40px;
-  box-shadow: 0 0 10px -5px var(--color--1);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  user-select: none;
-}
-
-.page {
-  height: calc(100% - 40px);
-  padding: 10px;
-  overflow-y: auto;
-}
-
-.btn-menu {
-  cursor: pointer;
-  margin: 0 10px;
-}
-
-.btn-menu-full {
-  display: none;
-}
-
-.user {
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
-}
-
-.user figure {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-left: 10px;
-}
-
-.user figure img {
-  height: 100%;
-}
-
-.dashboard footer {
-  display: flex;
-  align-items: center;
-  height: 20px;
-  background: var(--color--1);
-  padding: 0 10px;
-  user-select: none;
-}
-
-.dashboard footer > * {
-  color: #fff;
+  transform: translateX(0);
 }
 
 @media screen and (min-width: 768px) {
-  .overlay {
+  .overlay,
+  .section-main header .left .btn-mobile {
     display: none;
   }
-
-  .dashboard {
+  .section-main header .left .btn-web {
     display: flex;
-    flex-wrap: wrap;
   }
-
-  .dashboard aside {
-    transform: translateX(0);
+  .aside-menu {
     position: static;
-    height: calc(100vh - 20px);
+    transform: unset;
+    height: 100%;
   }
-
-  .dashboard section {
+  .dashboard-section {
+    display: flex;
+  }
+  .section-main {
     flex: 1;
   }
-
-  .dashboard footer {
-    width: 100%;
-  }
-
-  .close-menu {
-    width: 0px !important;
-    overflow: hidden;
-  }
-  .btn-menu {
-    display: none;
-  }
-  .btn-menu-full {
-    display: initial;
+  .close-menu-web {
+    width: 0;
   }
 }
 </style>

@@ -30,13 +30,13 @@ const routes = [
     {
         path: '/sale/pdv',
         name: 'SalePDV',
-        component: lazyLoad('sale/PDV'),
+        component: lazyLoad('PDV'),
         meta: { layout: 'empty' }
     },
     {
-        path: '/register/client',
-        name: 'RegisterClient',
-        component: lazyLoad('RegisterClient'),
+        path: '/search/client',
+        name: 'SearchClient',
+        component: lazyLoad('SearchClient'),
         meta: { layout: 'default' }
     }
 ]
